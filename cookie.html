@@ -8,12 +8,69 @@
 </head>
 
 <body>
+    <div id="msg">
+        Wellcome <span id="username"></span>
+        <button onclick="logOut()">LogOut</button>
+    </div>
+
+    <div id="form">
+        <input type="text" id="fname">
+        <input type="text" id="lname">
+        <button onclick="register()">Register</button>
+    </div>
     <script src="assets/js/helpers.js"></script>
     <script>
+
+        if (getCookie('fname') == '' || getCookie('lname') == '') {
+            showForm();
+            hideMsg();
+        } else {
+            showMsg();
+            hideForm();
+        }
+
+
         // let x = document.cookie;
         // document.cookie = 'username=masoo; password=12345;expires=Wed, 01 Jan 2024';
 
-        setCookie('fname', 'mansoureh', 30);
+        // setCookie('fname', 'mansoureh', 30);
+
+        function register() {
+            let fname = document.getElementById('fname').value;
+            let lname = document.getElementById('lname').value;
+            setCookie('fname', fname, 30);
+            setCookie('lname', lname, 30);
+            hideForm();
+            showMsg();
+        }
+
+        function logOut() {
+            deleteCookie('fname');
+            deleteCookie('lname');
+            showForm();
+            hideMsg();
+        }
+
+        function showMsg() {
+            updateMsg();
+            document.getElementById('msg').style.display = 'block';
+        }
+        function hideMsg() {
+            document.getElementById('msg').style.display = 'none';
+        }
+
+        function showForm() {
+            document.getElementById('form').style.display = 'block';
+        }
+        function hideForm() {
+            document.getElementById('form').style.display = 'none';
+        }
+
+        function updateMsg() {
+            document.getElementById('username').innerText = getCookie('fname') + ' ' + getCookie('lname');
+        }
+
+
     </script>
 </body>
 
