@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="user1"></div>
+
+
+    <script>
+        class Wallet {
+            // price = 12000;
+            // userId = 10;
+            constructor(id, p) {
+                this.price = p;
+                this.userId = id;
+            }
+            info() {
+                console.log(`your wallet id=${this.userId} price = ${this.price}`);
+            }
+            charge(p) {
+                this.price = this.price + p;
+                this.updateView();
+            }
+            buy(p) {
+                this.price = this.price - p;
+                this.updateView();
+            }
+            updateView() {
+                document.getElementById('user1').innerText = `your wallet id=${this.userId} price = ${this.price}`;
+            }
+        }
+
+        let v1 = new Wallet(10, 8000);
+        v1.charge(2000);
+        v1.charge(1000);
+        v1.buy(1000);
+        v1.info();
+
+        // let v2 = new Wallet();
+        // v2.price = 5000;
+        // v2.info();
+
+        // let v2 = new Wallet(15, 32000);
+        // v2.info();
+
+
+
+
+    </script>
+</body>
+
+</html>
