@@ -9,36 +9,52 @@
 
 <body>
     <div id="user1"></div>
+    <div id="user10"></div>
 
 
     <script>
         class Wallet {
             // price = 12000;
             // userId = 10;
-            constructor(id, p) {
+            constructor(id, p, elId) {
+                // if (p < 0) this.price = 0;
+                // else this.price = p;
+
                 this.price = p;
                 this.userId = id;
+                this.elementId = elId;
+                // this.updateView();
             }
-            info() {
-                console.log(`your wallet id=${this.userId} price = ${this.price}`);
+            get price() {
+                return this._price + 'تومان';
             }
-            charge(p) {
-                this.price = this.price + p;
-                this.updateView();
+            set price(p) {
+                if (p > 0) this._price = p;
+                else this.price = 0;
             }
-            buy(p) {
-                this.price = this.price - p;
-                this.updateView();
-            }
-            updateView() {
-                document.getElementById('user1').innerText = `your wallet id=${this.userId} price = ${this.price}`;
-            }
+
+
+            // info() {
+            //     console.log(`your wallet id=${this.userId} price = ${this.price}`);
+            // }
+            // charge(p) {
+            //     this.price = this.price + p;
+            //     this.updateView();
+            // }
+            // buy(p) {
+            //     this.price = this.price - p;
+            //     this.updateView();
+            // }
+            // updateView() {
+            //     document.getElementById(this.elementId).innerText = `your wallet id=${this.userId} price = ${this.price}`;
+            // }
         }
 
-        let v1 = new Wallet(10, 8000);
-        v1.charge(2000);
-        v1.charge(1000);
-        v1.buy(1000);
+        let v1 = new Wallet(1, 1000, 'user1');
+        // v1.charge(2000);
+        // v1.charge(1000);
+        // v1.charge(2000);
+        // v1.buy(1000);
         v1.info();
 
         // let v2 = new Wallet();
@@ -47,6 +63,9 @@
 
         // let v2 = new Wallet(15, 32000);
         // v2.info();
+
+        let v10 = new Wallet(10, 2000, 'user10');
+
 
 
 
