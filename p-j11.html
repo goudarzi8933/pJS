@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .item {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <input type="text" data-number>
+    <input type="text" data-number>
+    <input type="text" data-number>
+    <input type="text" data-number>
+    <input type="text" data-number>
+    <input type="text" data-number>
+    <button onclick="calcInput()">Calc</button> -->
+
+    <!-- ----------------- -->
+    <div id="box"></div>
+
+
+
+    <script>
+        // function calcInput() {
+        //     let nums = [];
+        //     nums.push(document.querySelectorAll("[data-number]")[0].value);
+        //     nums.push(document.querySelectorAll("[data-number]")[1].value);
+        //     nums.push(document.querySelectorAll("[data-number]")[2].value);
+        //     nums.push(document.querySelectorAll("[data-number]")[3].value);
+        //     nums.push(document.querySelectorAll("[data-number]")[4].value);
+        //     nums.push(document.querySelectorAll("[data-number]")[5].value);
+        //     console.log(nums);
+        // }
+
+        // -----------------------------
+
+
+        let products = [
+            { id: 125, title: 'product1', color: 'red', price: 25000 },
+            { id: 57, title: 'product2', color: 'blue', price: 50000 },
+            { id: 179, title: 'product3', color: 'green', price: 75000 },
+            { id: 100, title: 'product4', color: 'red', price: 125000 },
+        ];
+
+        let parent = document.getElementById('box');
+        for (let i = 0; i < products.length; i++) {
+            parent.innerHTML += `<div class='item'>
+                <span>${products[i].id}</span>
+                <h2>${products[i].title}</h2>
+                <span>${products[i].color}</span>
+                <br>
+                <span>${products[i].price}</span>
+                </div>`;
+        }
+
+
+
+    </script>
+</body>
+
+</html>
