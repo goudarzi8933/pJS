@@ -15,7 +15,7 @@
         }
 
         .filter {
-            box-shadow: rgba(240, 46, 169, 0.079) 0px 5px, rgba(240, 46, 169, 0.019) 0px 5px, rgba(240, 46, 169, 0.129) 0px 8px, rgba(240, 46, 170, 0.1) 0px 15px, rgba(240, 46, 169, 0) 0px 15px;
+            /* box-shadow: rgba(240, 46, 169, 0.079) 0px 5px, rgba(240, 46, 169, 0.019) 0px 5px, rgba(240, 46, 169, 0.129) 0px 8px, rgba(240, 46, 170, 0.1) 0px 15px, rgba(240, 46, 169, 0) 0px 15px; */
             /* border: 1px solid red; */
             margin: auto;
             text-align: center;
@@ -24,7 +24,8 @@
 
         }
 
-        .filter input {
+        .filter input,
+        .filter select {
             padding: 3px 5px;
             border: 1px solid rgb(125, 115, 115);
             border-radius: 5px;
@@ -54,7 +55,6 @@
             padding: 5px;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
             /* border: 1px solid red; */
-            /* width: 16.16%; */
         }
 
         .item span:first-child {
@@ -65,7 +65,7 @@
             border-radius: 5px;
         }
 
-        .item span:last-of-type {
+        .item span:nth-of-type(2) {
             display: block;
             margin-top: 15px;
             text-align: center;
@@ -82,17 +82,19 @@
         }
 
         .btn {
+            display: flex;
+            justify-content: space-evenly;
             /* border: 1px solid red; */
             margin-left: 25px;
-            padding: 0 0 10px 0;
+            padding: 5px;
         }
 
         .btn button {
-            padding: 2px 8px 3px;
-            background: #d266b7d9;
+            padding: 2px 8px;
+            background: #d266b7d2;
             border: none;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 15px;
         }
 
         .btncart {
@@ -114,7 +116,7 @@
             position: fixed;
             border: 1px solid lightblue;
             background-color: rgba(205, 179, 228, 0.377);
-            left: -200px;
+            left: -260px;
             top: 0;
             height: 100%;
             width: 200px;
@@ -135,11 +137,41 @@
         li {
             display: block;
             margin-top: 10px;
-            border: 1px solid rgb(35, 39, 35);
+            border: 1px solid rgba(35, 39, 35, 0.145);
             padding: 3px 10px;
+            font-family: cursive;
+        }
+
+        li:nth-child(odd):not(:last-of-type) {
+            background: #cde48e;
+        }
+
+        li:nth-child(even):not(:last-of-type) {
+            background: #e4bd8e;
+
+        }
+
+        li:last-of-type {
+            background: #e95436;
+            margin-top: 50px;
+        }
+
+        .btnbuy {
+            padding: 5px 20px;
+            border: none;
+            border-radius: 5px;
+            background: rgb(84, 199, 86);
+            color: #242424;
+        }
+
+        .btnbuy:hover {
+            background: rgb(10, 91, 12);
+            color: #e7e2e2;
         }
 
         @media screen and (max-width:1075px) {
+
+            .filter,
             .item {
                 margin-left: 200px;
             }
@@ -148,14 +180,26 @@
 </head>
 
 <body>
-    <div class="filter">
-        <input type="text" id="min" onkeyup="updateBox()" placeholder="1000">
-        <input type="text" id="max" onkeyup="updateBox()" placeholder="1000">
+    <div class="filter d-flex justify-content-evenly">
+        <div>
+            <input type="text" id="min" onkeyup="updateBox()" placeholder="1000">
+            <input type="text" id="max" onkeyup="updateBox()" placeholder="1000">
+        </div>
+        <div>
+            <select name="product" id="selectp" class="select">
+                <option value="">choose</option>
+                <option value="STABILOBOSS">STABILO BOSS</option>
+                <option value="STICKPAPER">STICK PAPER</option>
+                <option value="NOTETYPE">NOTE TYPE</option>
+                <option value="STABILOBOSS">STABILO BOSS</option>
+            </select>
+        </div>
     </div>
     <div class="container">
         <div class="row">
-            <div id="sidenav" class="col-md-4 col-sm-3">
+            <div id="sidenav" class="col-md-2 col-sm-3">
                 <ul id="cart"></ul>
+                <button class="btnbuy">buy</button>
 
             </div>
         </div>
@@ -183,17 +227,18 @@
             { id: 125, url: 'https://s6.uupload.ir/files/7c1c17c262412ed239550c38da2405a4_buqj.jpg', price: 25000 },
             { id: 57, url: 'https://s6.uupload.ir/files/a7fa5e45b5a8bb355b8d4ca9f142e58e_qmvq.jpg', price: 75000 },
             { id: 179, url: 'https://s6.uupload.ir/files/a51a1a2c040b733cdaaebdb10d6c42c4_x476.jpg', price: 10000 },
-            { id: 100, url: 'https://s6.uupload.ir/files/ca584d6f367691db32bc9cbb9de235c9_cqnv.jpg', price: 125000 },
+            { id: 100, url: 'https://s6.uupload.ir/files/7c1c17c262412ed239550c38da2405a4_buqj.jpg', price: 125000 },
         ];
 
         function fillBox(filterProducts) {
             let parent = document.getElementById("product");
             parent.innerHTML = "";
             for (let i = 0; i < filterProducts.length; i++) {
-                parent.innerHTML += ` <div class="item col-lg-4 col-md-7 col-sm-12">
+                parent.innerHTML += ` <div class="item col-lg-4 col-md-7 col-sm-8">
             <span>${filterProducts[i].id}</span>
             <img class='img-fluid' src=${filterProducts[i].url}
             <br>
+            
             <span>${filterProducts[i].price}</span>
             <br>
             <div class='btn'>
@@ -277,7 +322,7 @@
             cart.forEach((item) => {
                 document.getElementById("cart").innerHTML += `<li>${item.product_id}  = ${item.count}
                     <br>
-                     ${item.product_price} -->${item.product_price * item.count
+                     ${item.product_price} ==> ${item.product_price * item.count
                     } </li>`;
                 totalPrice += item.product_price * item.count;
             });
@@ -292,38 +337,13 @@
         //     document.getElementById('sidenav').style.left = '-200px';
         // }
 
-        // function fillBox(filterProducts) {
-        //     let parent = document.getElementById('product');
-        //     for (let i = 0; i < filterProducts.length; i++) {
-        //         parent.innerHTML += `<div class='item col-lg-4 col-md-7 col-sm-12'>
-        //         <span>${filterProducts[i].id}</span>
-        //         <img class='img-fluid' src=${filterProducts[i].url}
-        //         <br>
-        //         <span>${filterProducts[i].price}</span>
-        //         <br>
-        //         <div class='btn col-xl-7'><button>+</button>
-        //         <input type='text'>
-        //         <button>-</button></div>
-        //         <button class='btncart'>Add to Cart</button
-        //         </div>`
-        //     }
-        // }
-        // fillBox(products);
+        const select = document.querySelector('#exampleFormControlSelect1');
+        const input = document.querySelector('#exampleFormControlReadOnlyInputPlain1');
 
+        select.addEventListener('change', () => {
+            input.value = select.value;
+        });
 
-        // function updateBox() {
-        //     let minP = Number(document.getElementById('min').value);
-        //     let maxP = Number(document.getElementById('max').value);
-        //     console.log(minP, maxP);
-        //     let pf = products.filter(function (item) {
-        //         if (minP == 0 && maxP == 0) return true;
-        //         else if (minP == 0 && maxP != 0) return item.price < maxP;
-        //         else if (maxP == 0 && minP != 0) return item.price > minP;
-        //         else return item.price < maxP && item.price > minP;
-        //     });
-
-        //     fillBox(pf)
-        // }
 
     </script>
 </body>
