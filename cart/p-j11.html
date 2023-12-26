@@ -108,16 +108,42 @@
             color: #fff;
         }
 
-        #cart {
-            position: absolute;
+        #sidenav {
+            list-style-type: none;
+            text-align: center;
+            position: fixed;
+            border: 1px solid lightblue;
+            background-color: rgba(205, 179, 228, 0.377);
+            left: -200px;
             top: 0;
-            left: -50px;
+            height: 100%;
+            width: 200px;
+            transition: 1s;
             box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-            background: rgb(80, 180, 87);
-            color: #fff;
+
         }
 
-        @media screen and (max-width:579px) {}
+
+        #cart {
+            /* background: rgb(163, 230, 167); */
+            color: #000000;
+            display: none;
+            margin-top: 40px;
+            padding: 10px;
+        }
+
+        li {
+            display: block;
+            margin-top: 10px;
+            border: 1px solid rgb(35, 39, 35);
+            padding: 3px 10px;
+        }
+
+        @media screen and (max-width:1075px) {
+            .item {
+                margin-left: 200px;
+            }
+        }
     </style>
 </head>
 
@@ -127,7 +153,15 @@
         <input type="text" id="max" onkeyup="updateBox()" placeholder="1000">
     </div>
     <div class="container">
-        <ul id="cart"></ul>
+        <div class="row">
+            <div id="sidenav" class="col-md-4 col-sm-3">
+                <ul id="cart"></ul>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         <div class="row">
             <div id="product" class="">
                 <!-- <div class="item">
@@ -190,6 +224,9 @@
 
 
         function addToCart(id) {
+            showSidenav();
+            document.getElementById('cart').style.display = "block";
+
             let productIndex = products.findIndex(function (item) {
                 return item.id == id;
             });
@@ -215,7 +252,7 @@
         }
 
         function minusFromCart(id) {
-            console.log("hi");
+            // console.log("hi");
             let cartIndex = cart.findIndex(function (item) {
                 return item.product_id == id;
             });
@@ -238,8 +275,9 @@
             document.getElementById("cart").innerHTML = "";
             let totalPrice = 0;
             cart.forEach((item) => {
-                document.getElementById("cart").innerHTML += `<li>${item.product_title
-                    } -- ${item.count} -- ${item.product_price} -->${item.product_price * item.count
+                document.getElementById("cart").innerHTML += `<li>${item.product_id}  = ${item.count}
+                    <br>
+                     ${item.product_price} -->${item.product_price * item.count
                     } </li>`;
                 totalPrice += item.product_price * item.count;
             });
@@ -247,6 +285,12 @@
                 "cart"
             ).innerHTML += `<li>total price : ${totalPrice}</li>`;
         }
+        let showSidenav = function () {
+            document.getElementById('sidenav').style.left = '0px';
+        }
+        // let hideSidenav = function () {
+        //     document.getElementById('sidenav').style.left = '-200px';
+        // }
 
         // function fillBox(filterProducts) {
         //     let parent = document.getElementById('product');
