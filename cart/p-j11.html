@@ -110,18 +110,35 @@
             color: #fff;
         }
 
-        #sidenav {
+        #sidebar {
             list-style-type: none;
             text-align: center;
             position: fixed;
             border: 1px solid lightblue;
-            background-color: rgba(205, 179, 228, 0.377);
+            background-color: rgba(205, 179, 228, 0.177);
             left: -260px;
             top: 0;
             height: 100%;
             width: 200px;
-            transition: 1s;
+            transition: 0.6s;
             box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+        }
+
+        #sidebar .btnsideclose {
+            display: block;
+            font-size: 30px;
+            position: absolute;
+            top: -10px;
+            right: 0;
+            cursor: pointer;
+            background: #a6a6a663;
+            padding: 0 15px;
+        }
+
+        #sidebar .btnsideclose:hover {
+            background: #a6a6a6b2;
+            color: #fff;
 
         }
 
@@ -197,7 +214,8 @@
     </div>
     <div class="container">
         <div class="row">
-            <div id="sidenav" class="col-md-2 col-sm-3">
+            <div id="sidebar" class="col-md-2 col-sm-3">
+                <span class="btnsideclose" onclick="hidesidebar()">x</span>
                 <ul id="cart"></ul>
                 <button class="btnbuy">buy</button>
 
@@ -224,10 +242,10 @@
     <script>
         let cart = [];
         let products = [
-            { id: 125, url: 'https://s6.uupload.ir/files/7c1c17c262412ed239550c38da2405a4_buqj.jpg', price: 25000 },
-            { id: 57, url: 'https://s6.uupload.ir/files/a7fa5e45b5a8bb355b8d4ca9f142e58e_qmvq.jpg', price: 75000 },
-            { id: 179, url: 'https://s6.uupload.ir/files/a51a1a2c040b733cdaaebdb10d6c42c4_x476.jpg', price: 10000 },
-            { id: 100, url: 'https://s6.uupload.ir/files/7c1c17c262412ed239550c38da2405a4_buqj.jpg', price: 125000 },
+            { id: 125, url: 'https://s6.uupload.ir/files/7c1c17c262412ed239550c38da2405a4_0l4x.jpg', price: 25000 },
+            { id: 57, url: 'https://s6.uupload.ir/files/a7fa5e45b5a8bb355b8d4ca9f142e58e_lmv.jpg', price: 75000 },
+            { id: 179, url: 'https://s6.uupload.ir/files/ca584d6f367691db32bc9cbb9de235c9_i53j.jpg', price: 10000 },
+            { id: 100, url: 'https://s6.uupload.ir/files/7c1c17c262412ed239550c38da2405a4_0l4x.jpg', price: 125000 },
         ];
 
         function fillBox(filterProducts) {
@@ -269,7 +287,7 @@
 
 
         function addToCart(id) {
-            showSidenav();
+            showsidebar();
             document.getElementById('cart').style.display = "block";
 
             let productIndex = products.findIndex(function (item) {
@@ -330,19 +348,19 @@
                 "cart"
             ).innerHTML += `<li>total price : ${totalPrice}</li>`;
         }
-        let showSidenav = function () {
-            document.getElementById('sidenav').style.left = '0px';
+        let showsidebar = function () {
+            document.getElementById('sidebar').style.left = '0px';
         }
-        // let hideSidenav = function () {
-        //     document.getElementById('sidenav').style.left = '-200px';
-        // }
+        let hidesidebar = function () {
+            document.getElementById('sidebar').style.left = '-260px';
+        }
 
-        const select = document.querySelector('#exampleFormControlSelect1');
-        const input = document.querySelector('#exampleFormControlReadOnlyInputPlain1');
+        // const select = document.querySelector('.select');
+        // const input = document.querySelector('');
 
-        select.addEventListener('change', () => {
-            input.value = select.value;
-        });
+        // select.addEventListener('change', () => {
+        //     input.value = select.value;
+        // });
 
 
     </script>
