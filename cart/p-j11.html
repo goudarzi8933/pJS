@@ -15,7 +15,7 @@
         }
 
         .filter {
-            box-shadow: rgba(240, 46, 170, 0.4) 0px 5px, rgba(240, 46, 170, 0.3) 0px 10px, rgba(240, 46, 170, 0.2) 0px 15px, rgba(240, 46, 170, 0.1) 0px 20px, rgba(240, 46, 170, 0.05) 0px 25px;
+            box-shadow: rgba(240, 46, 169, 0.079) 0px 5px, rgba(240, 46, 169, 0.019) 0px 5px, rgba(240, 46, 169, 0.129) 0px 8px, rgba(240, 46, 170, 0.1) 0px 15px, rgba(240, 46, 169, 0) 0px 15px;
             /* border: 1px solid red; */
             margin: auto;
             text-align: center;
@@ -44,7 +44,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
-            margin: 0 auto;
+            /* margin: 0 auto; */
             padding: 15px;
 
         }
@@ -54,7 +54,7 @@
             padding: 5px;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
             /* border: 1px solid red; */
-            /* width: 25%; */
+            /* width: 16.16%; */
         }
 
         .item span:first-child {
@@ -76,9 +76,45 @@
 
         .item img {
             display: block;
-            width: 300px;
-            height: 300px;
+            width: 500px;
+            height: 400px;
             /* max-width: 100%; */
+        }
+
+        .btn {
+            /* border: 1px solid red; */
+            margin-left: 25px;
+            padding: 0 0 10px 0;
+        }
+
+        .btn button {
+            padding: 2px 8px 3px;
+            background: #d266b7d9;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .btncart {
+            background: #2fa137bb;
+            padding: 4px 10px;
+            border: none;
+            border-radius: 5px;
+            margin-left: 8px;
+        }
+
+        .btncart:hover {
+            background: #237c29ff;
+            color: #fff;
+        }
+
+        #cart {
+            position: absolute;
+            top: 0;
+            left: -50px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            background: rgb(80, 180, 87);
+            color: #fff;
         }
 
         @media screen and (max-width:579px) {}
@@ -90,20 +126,25 @@
         <input type="text" id="min" onkeyup="updateBox()" placeholder="1000">
         <input type="text" id="max" onkeyup="updateBox()" placeholder="1000">
     </div>
-    <div id="product" class="">
-        <!-- <div class="item">
-                <img src="assets/img/7c1c17c262412ed239550c38da2405a4.jpg" alt="" class="card-img-top img-fluid">
-                <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <p class="card-text"></p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div> -->
-    </div>
+    <div class="container">
+        <ul id="cart"></ul>
+        <div class="row">
+            <div id="product" class="">
+                <!-- <div class="item">
+                            <img src="assets/img/7c1c17c262412ed239550c38da2405a4.jpg" alt="" class="card-img-top img-fluid">
+                            <div class="card-body">
+                                <h5 class="card-title"></h5>
+                                <p class="card-text"></p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div> -->
+            </div>
+        </div>
     </div>
 
 
     <script>
+        let cart = [];
         let products = [
             { id: 125, url: 'https://s6.uupload.ir/files/7c1c17c262412ed239550c38da2405a4_buqj.jpg', price: 25000 },
             { id: 57, url: 'https://s6.uupload.ir/files/a7fa5e45b5a8bb355b8d4ca9f142e58e_qmvq.jpg', price: 75000 },
@@ -112,35 +153,133 @@
         ];
 
         function fillBox(filterProducts) {
-            let parent = document.getElementById('product');
+            let parent = document.getElementById("product");
+            parent.innerHTML = "";
             for (let i = 0; i < filterProducts.length; i++) {
-                parent.innerHTML += `<div class='item'>
-                <span>${filterProducts[i].id}</span>
-                <img src=${products[i].url}
-                <br>
-                <span>${products[i].price}</span>
-                <br>
-                <button>add</button>
-                <input type='text'>
-                </div>`
+                parent.innerHTML += ` <div class="item col-lg-4 col-md-7 col-sm-12">
+            <span>${filterProducts[i].id}</span>
+            <img class='img-fluid' src=${filterProducts[i].url}
+            <br>
+            <span>${filterProducts[i].price}</span>
+            <br>
+            <div class='btn'>
+                <button onclick="addToCart(${filterProducts[i].id})">add</button>
+            <span data-count-id="${filterProducts[i].id}">0</span>
+            <button onclick="minusFromCart(${filterProducts[i].id})">minus</button>
+            </div>
+        </div>`;
             }
         }
 
         fillBox(products);
 
-
-
         function updateBox() {
-            let minP = Number(document.getElementById('min').value);
-            let maxP = Number(document.getElementById('max').value);
+            let minP = Number(document.getElementById("min").value);
+            let maxP = Number(document.getElementById("max").value);
+            console.log(minP);
+            console.log(maxP);
             let pf = products.filter(function (item) {
                 if (minP == 0 && maxP == 0) return true;
-                else if (minP == 0 && maxP != 0) return item.price < maxP
-                return item.price < maxP && item.price > minP;
+                else if (minP == 0 && maxP != 0) return item.price < maxP;
+                else if (maxP == 0 && minP != 0) return item.price > minP;
+                else return item.price < maxP && item.price > minP;
             });
 
-            fillBox(pf)
+            fillBox(pf);
         }
+
+
+        function addToCart(id) {
+            let productIndex = products.findIndex(function (item) {
+                return item.id == id;
+            });
+
+            let cartIndex = cart.findIndex(function (item) {
+                return item.product_id == id;
+            });
+            if (cartIndex == -1) {
+                cart.push({
+                    count: 1,
+                    product_title: products[productIndex].title,
+                    product_id: products[productIndex].id,
+                    product_price: products[productIndex].price,
+                });
+                document.querySelector(`[data-count-id="${id}"]`).innerHTML = 1;
+            } else {
+                cart[cartIndex].count += 1;
+                document.querySelector(`[data-count-id="${id}"]`).innerHTML =
+                    cart[cartIndex].count;
+            }
+
+            updateCart();
+        }
+
+        function minusFromCart(id) {
+            console.log("hi");
+            let cartIndex = cart.findIndex(function (item) {
+                return item.product_id == id;
+            });
+            if (cartIndex == -1) {
+                alert("mahsool mored nazar vojod nadarad");
+            } else {
+                if (cart[cartIndex].count > 1) {
+                    cart[cartIndex].count -= 1;
+                    document.querySelector(`[data-count-id="${id}"]`).innerHTML =
+                        cart[cartIndex].count;
+                } else if (cart[cartIndex].count == 1) {
+                    cart.splice(cartIndex, 1);
+                    document.querySelector(`[data-count-id="${id}"]`).innerHTML = 0;
+                }
+            }
+            updateCart();
+        }
+
+        function updateCart() {
+            document.getElementById("cart").innerHTML = "";
+            let totalPrice = 0;
+            cart.forEach((item) => {
+                document.getElementById("cart").innerHTML += `<li>${item.product_title
+                    } -- ${item.count} -- ${item.product_price} -->${item.product_price * item.count
+                    } </li>`;
+                totalPrice += item.product_price * item.count;
+            });
+            document.getElementById(
+                "cart"
+            ).innerHTML += `<li>total price : ${totalPrice}</li>`;
+        }
+
+        // function fillBox(filterProducts) {
+        //     let parent = document.getElementById('product');
+        //     for (let i = 0; i < filterProducts.length; i++) {
+        //         parent.innerHTML += `<div class='item col-lg-4 col-md-7 col-sm-12'>
+        //         <span>${filterProducts[i].id}</span>
+        //         <img class='img-fluid' src=${filterProducts[i].url}
+        //         <br>
+        //         <span>${filterProducts[i].price}</span>
+        //         <br>
+        //         <div class='btn col-xl-7'><button>+</button>
+        //         <input type='text'>
+        //         <button>-</button></div>
+        //         <button class='btncart'>Add to Cart</button
+        //         </div>`
+        //     }
+        // }
+        // fillBox(products);
+
+
+        // function updateBox() {
+        //     let minP = Number(document.getElementById('min').value);
+        //     let maxP = Number(document.getElementById('max').value);
+        //     console.log(minP, maxP);
+        //     let pf = products.filter(function (item) {
+        //         if (minP == 0 && maxP == 0) return true;
+        //         else if (minP == 0 && maxP != 0) return item.price < maxP;
+        //         else if (maxP == 0 && minP != 0) return item.price > minP;
+        //         else return item.price < maxP && item.price > minP;
+        //     });
+
+        //     fillBox(pf)
+        // }
 
     </script>
 </body>
