@@ -16,13 +16,30 @@
 
     <!-- <div id="dv1"></div> -->
 
-    <!-- ----------------- -->
-    <div id="dv2">
+    <!-- ------------remove----- -->
+    <!-- <div id="dv2">
         <div id="p1">this is a paragraph</div>
         <div id="p2">this is a another</div>
-    </div>
+    </div> -->
 
-    <!-- ----------------- -->
+    <!-- --------------replace--- -->
+
+    <!-- <div id="dv3">
+        <div id="p1">this is a paragraph</div>
+        <div id="p2">this is a another</div>
+    </div> -->
+
+    <!-- ----------collection -->
+    <!-- <h2>JavaScript HTML DOM</h2>
+
+    <p>Hello World!</p>
+
+    <p>Hello Norway!</p>
+
+    <p>Click the button to change the color of all p elements.</p>
+
+    <button onclick="myFunction()">Try it</button> -->
+
 
 
 
@@ -43,15 +60,36 @@
         // document.getElementById('dv1').appendChild(para);
 
 
-        // -------------
+        // -------------remove
 
         // const element = document.getElementById('p1');
         // element.remove();
 
-        const parent = document.getElementById('dv2');
-        const child = document.getElementById('p1');
+        // const parent = document.getElementById('dv2');
+        // const child = document.getElementById('p1');
 
-        parent.removeChild(child);
+        // parent.removeChild(child);
+
+
+
+        // ----------------replace
+        // const para = document.createElement('p');
+        // const node = document.createTextNode('this is a new text');
+        // para.appendChild(node);
+
+        // const parent = document.getElementById('dv3');
+        // const child = document.getElementById('p1');
+        // parent.replaceChild(para, child);
+
+        // ------------------- collection
+        // function myFunction() {
+        //     const myCollection = document.getElementsByTagName("p");
+        //     for (let i = 0; i < myCollection.length; i++) {
+        //         myCollection[i].style.color = "red";
+        //     }
+        // }
+
+
 
 
 
