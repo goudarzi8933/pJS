@@ -8,12 +8,22 @@
 </head>
 
 <body>
-    <p id="demo">hello world
+    <!-- <p id="demo">hello world
         <span>test</span>
-    </p>
+    </p> -->
 
     <script>
-        console.log(document.getElementById('demo').firstChild.nodeValue);
+        // console.log(document.getElementById('demo').firstChild.nodeValue);
+
+        const para = document.createElement('p');
+        const text = document.createTextNode('hello world');
+        // console.log(para);
+        // console.log(text);
+
+        para.appendChild(text);
+        console.log(para);
+
+
     </script>
 </body>
 
