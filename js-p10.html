@@ -17,10 +17,13 @@
     <!-- <div id="dv1"></div> -->
 
     <!-- ----------------- -->
-    <div>
+    <div id="dv2">
         <div id="p1">this is a paragraph</div>
         <div id="p2">this is a another</div>
     </div>
+
+    <!-- ----------------- -->
+
 
 
 
@@ -42,8 +45,13 @@
 
         // -------------
 
-        const element = document.getElementById('p1');
-        element.remove();
+        // const element = document.getElementById('p1');
+        // element.remove();
+
+        const parent = document.getElementById('dv2');
+        const child = document.getElementById('p1');
+
+        parent.removeChild(child);
 
 
 
