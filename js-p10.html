@@ -12,16 +12,39 @@
         <span>test</span>
     </p> -->
 
+    <!-- ---------------- -->
+
+    <!-- <div id="dv1"></div> -->
+
+    <!-- ----------------- -->
+    <div>
+        <div id="p1">this is a paragraph</div>
+        <div id="p2">this is a another</div>
+    </div>
+
+
+
     <script>
         // console.log(document.getElementById('demo').firstChild.nodeValue);
 
-        const para = document.createElement('p');
-        const text = document.createTextNode('hello world');
-        // console.log(para);
-        // console.log(text);
+        // ----------------------------
 
-        para.appendChild(text);
-        console.log(para);
+        // const para = document.createElement('p');
+        // const text = document.createTextNode('hello world');
+        // // console.log(para);
+        // // console.log(text);
+
+        // para.appendChild(text);
+        // // console.log(para);
+
+        // document.getElementById('dv1').appendChild(para);
+
+
+        // -------------
+
+        const element = document.getElementById('p1');
+        element.remove();
+
 
 
     </script>
