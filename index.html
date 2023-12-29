@@ -46,7 +46,20 @@
             document.getElementById('avg').innerHTML = sum / nums.length;
 
 
+            let min1 = nums[0];
+            for (i = 1; i < nums.length; i++) {
+                if (min1 > nums[i]) min1 = nums[i]
+            }
 
+
+            let max1 = nums[0];
+            for (i = 1; i < nums.length; i++) {
+                if (max1 < nums[i]) max1 = nums[i]
+            }
+            document.getElementById('min').innerHTML = min1;
+            document.getElementById('max').innerHTML = max1;
+
+        }
     </script>
 </body>
 
