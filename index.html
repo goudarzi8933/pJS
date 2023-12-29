@@ -29,6 +29,25 @@
         max = <span id="max"></span>
     </div>
 
+
+    <script>
+        function calcInput() {
+            let nums = [];
+            let elements = document.querySelectorAll('[data-number]');
+            for (let i = 0; i < elements.length; i++) {
+                nums.push(parseFloat(document.querySelectorAll('[data-number]')[i].value))
+            }
+
+            let sum = 0;
+            for (let i = 0; i < nums.length; i++) {
+                sum += nums[i];
+            }
+            document.getElementById('sum').innerHTML = sum;
+            document.getElementById('avg').innerHTML = sum / nums.length;
+
+
+
+    </script>
 </body>
 
 </html>
