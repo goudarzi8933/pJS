@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* استایل مربوط به هدر صفحه ما */
+        .header {
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            width: 100%;
+            background-color: #f9c413;
+        }
+
+        /* نوار اسکرول ما با رنگ طوسی */
+        .progressContainer {
+            width: 100%;
+            height: 8px;
+            background: #ccc;
+        }
+
+        /* قسمت متحرک نوار اسکرول */
+        .progressBar {
+            height: 8px;
+            background: #01a8ec;
+            width: 0%;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="progressContainer">
+            <div class="progressBar" id="Bar"></div>
+        </div>
+    </div>
+
+
+    <div style="height:2000px;"></div>
+    <script>
+        window.onscroll = function () { progressFunction() };
+
+        function progressFunction() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("Bar").style.width = scrolled + "%";
+        }
+    </script>
+</body>
+
+</html>
