@@ -31,7 +31,7 @@
         .cm {
             max-width: 85em;
             min-width: 320px;
-            margin: 25% auto;
+            margin: 15% auto;
             padding: 0 0.5em;
             position: relative;
             box-sizing: border-box;
@@ -45,24 +45,31 @@
             padding: 3rem;
         }
 
+        #display {
+            margin: 0 auto;
+            padding-top: 30px;
+            padding-bottom: 20px;
+            font-size: 30px;
+
+        }
+
         button {
             background: #487a8a;
             border: 1px solid #FFF;
             color: #FFF;
             padding: 1em 2em;
             border-radius: 5px;
-            font-size: 1em;
+            font-size: 1rem;
             transition: 0.5s;
+            /* display: flex; */
+            /* flex-wrap: wrap; */
+            justify-content: center;
+            align-items: center;
         }
 
         button:hover {
             color: #fff;
             background: rgba(10, 107, 75, 0.762);
-        }
-
-        #display {
-            margin-bottom: 1em;
-            font-size: 2em;
         }
 
         table#historyTable {
@@ -101,17 +108,12 @@
 <body>
     <div class="cm">
         <div class="box">
-            <div id="display">
-                <span id="seconds">00</span>
-                :
-                <span id="minutes">00</span>
-                :
-                <span id="hours">00</span>
+            <p id="display"><span id="seconds">00</span>:<span id="tens">00</span></p>
+            <div class="buttons">
+                <button id="start">شروع / توقف </button>
+                <button id="reset">شروع مجدد</button>
+                <button id="record">ثبت</button>
             </div>
-            <button type="button" id="start" onclick="start()">شروع</button>
-            <button type="button" id="stop" onclick="stop()">توقف</button>
-            <button type="button" id="reset" onclick="reset()">شروع مجدد</button>
-            <button type="button" id="record" onclick="record()">ثبت</button>
         </div>
         <table id="historyTable">
             <thead>
@@ -134,58 +136,123 @@
     <!-- <script src="assets/js/jquery.color-2.1.2.min.js"></script> -->
 
     <script>
-        // $(function () {
-        let pastTime = [];
+        $(function () {
+
+            // var time = 0;
+            // var seconds = 0;
+            // var minutes = 0;
+            // var hours = 0;
+            // var Interval;
+
+            // var wasPaused = true;
+            // var startButton = $('#start');
+            // // var stopButton = $('#stop');
+            // var resetButton = $('#reset');
+            // var recordButton = $('#record');
+            // var display = $('#display');
+            // var hr = $('#hours');
+            // var min = $('#minutes');
+            // var sec = $('#seconds');
+
+            // Variables 
+            var pastTimes = [];
+
+            // Timer variables
+            var interval;
+            var time = 0;
+            var tensCount = 0;
+            var secondsCount = 0;
+
+            // Timer flags
+            var wasPaused = true;
+            var startButton = $('#start');
+            var resetButton = $('#reset');
+            var recordButton = $('#record');
+            var display = $('#display');
+            var tens = $('#tens');
+            var seconds = $('#seconds');
+
+            for (var i = 0; pastTimes.length; i++) {
+                var p = $('<p>' + pastTimes[i] + '</p>');
+                display.append(p);
+            }
+            var startCallback = function () {
+                /**
+                 * When the stopwatch starts, the wasPaused flag is set to false, 
+                 * time increases. The next time the startButton is clicked, time 
+                 * pauses, the wasPaused flag is set to true
+                 */
+                if (wasPaused) {
+                    clearInterval(interval);
+                    interval = setInterval(startTimer, 10);
+                    wasPaused = false;
+                } else {
+                    clearInterval(interval);
+                    wasPaused = true;
+                }
+
+            };
+            startButton.on('click', startCallback);
+
+            var resetCallback = function () {
+                clearInterval(interval);
+                wasPaused = true;
+                tensCount = 0;
+                secondsCount = 0;
+                tens.html("00");
+                seconds.html("00");
+                $('#historyRows').html("");
+            };
+            resetButton.on('click', resetCallback);
+
+            var recordCallback = function () {
+                var row = $('<tr/>');
+                var cell = $('<td/>');
+
+                var s, t;
+                s = secondsCount;
+                t = tensCount;
+                // Display 0 when number is one digit, 00:00 in case of recording 0 ms
+                if (tensCount < 10) {
+                    t = '0' + tensCount;
+                }
+                if (tensCount === 0 && secondsCount === 0) {
+                    t = '00';
+                    s = '00';
+                }
+                if (secondsCount < 10) {
+                    s = '0' + secondsCount;
+                }
+                var inner = s + ':' + t;
+                cell.html(inner);
+                row.append(cell);
+                $('#historyRows').append(row);
+            };
+            recordButton.on('click', recordCallback);
 
 
-        let time = 0;
-        let seconds = 0;
-        let minutes = 0;
-        let hours = 0;
-        let Interval;
-
-        // let wasPaused = true;
-        let startButton = $('#start');
-        let stopButton = $('#stop');
-        let resetButton = $('#reset');
-        let recordButton = $('#record');
-        let display = $('#display');
-        let hr = $('#hours');
-        let min = $('#minutes');
-        let sec = $('#seconds');
-
-        for (let i = 0; pastTime.length; i++) {
-            let p = $('<p>' + pastTime[i] + '</p>');
-            display.append(p);
-        }
-        let start = function () {
-            clearInterval(Interval);
-            Interval = setInterval(startTimer, 1);
-        }
-
-        let stop = function () {
-            clearInterval(Interval);
-        }
-
-        startButton.on('click', start);
-        stopButton.on('click', stop);
-
-        var resetCallback = function () {
-            clearInterval(interval);
-            // wasPaused = true;
-            seconds = 0;
-            minutes = 0;
-            hours = 0;
-            sec.html("00");
-            min.html("00");
-            hr.html("00");
-            $('#historyRows').html("");
-        };
-        resetButton.on('click', resetCallback);
+            function startTimer() {
+                tensCount++;
+                if (tensCount < 10) {
+                    tens.html('0' + tensCount);
+                }
+                if (tensCount > 9) {
+                    tens.html(tensCount);
+                }
+                if (tensCount > 99) {
+                    secondsCount++;
+                    seconds.html('0' + secondsCount);
+                    tensCount = 0;
+                    tens.html('0' + 0);
+                }
+                if (secondsCount > 9) {
+                    seconds.html(secondsCount);
+                }
+            }
+        });
 
 
 
-        // })
     </script>
 </body>
 
