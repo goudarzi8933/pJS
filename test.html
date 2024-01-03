@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="#">
+        <select name="type" class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+            <option selected="">مدت زمان سرویس خود را انتخاب کنید</option>
+            <option value="{{ $service->monthly_price }}">ماهیانه</option>
+            <option value="{{ $service->yearly_price }}">سالیانه</option>
+        </select>
+        <input type="text" readonly="" class="form-control-plaintext" id="exampleFormControlReadOnlyInputPlain1"
+            value="">
+    </form>
+
+    <script>
+        const select = document.querySelector('#exampleFormControlSelect1');
+        const input = document.querySelector('#exampleFormControlReadOnlyInputPlain1');
+
+        select.addEventListener('change', () => {
+            input.value = select.value;
+        });
+    </script>
+</body>
+
+</html>
