@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+
+    <img alt="">
+    <button>click me</button>
+    <script>
+        $(function () {
+            function generateRandom(min, max) {
+                return Math.floor((max - min) * Math.random()) + min;
+            }
+
+            $('button').click(function () {
+                let src = `https://picsum.photos/id/${generateRandom(200, 1000)}/600/400`;
+                $('img').attr('src', src);
+            });
+        })
+    </script>
+</body>
+
+</html>
