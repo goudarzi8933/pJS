@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="#box"></div>
+
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        function handleRequest() {
+            axios.get("https://jsonplaceholder.typicode.com/users",).then(function (response) {
+                response.data.forEach((item) => {
+                    $('#box').append(`<div>
+                            <h2>user name: ${response[i].fname})</h2>
+                                <p>age: ${response[i].age}</p>
+                                </div>`);
+
+                });
+            })
+        }
+    </script>
+
+</body>
+
+</html>
